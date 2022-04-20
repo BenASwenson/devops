@@ -81,3 +81,27 @@ Bridging development and operations, cross-functional teams to collaborate and r
 - upgrade `sudo apt-get upgrade -y`
 - Who am I `uname` or `uname -a`
 - Where am I `pwd`
+- how to check files/folders in existing location `ls` or `ls -a`
+- how to create dir `mkdir dir_name`
+- navigate to any folder – change dir `cd folder_name`
+- how to change back to home location or any location - `cd ..` (one step) or `cd` enter  - to bring you back home
+- how to create a file `touch file_name` or `nano file_name`
+- To see the content of the file on terminal - `cat file_name`
+- How to copy file `cp location_file_name to destination_path`
+- cut & paste the file inside the test folder from current location - `mv /location/file_name /location/file_name`
+- exit out of nano - `ctrl x enter` or `cntrl x y enter`
+- how to delete them `rm -rf folder_name`
+- how to check running process in linux `top` or `ps aux`
+- how to delete/remove/kill process `kill pid`
+
+
+### Permissions
+- how to check permissions `ll`
+- how to switch to `root user` - `sudo su`
+- how to change permissions `chmod instruction file_name`
+- how to launch a process with time limit of 30sec
+  - `timeout DURATION COMMAND` ie `timeout 30s ping www.cyberciti.biz`
+- how to delete a process
+  - find the process ID (PID) of the program `pidof program_name`
+  - kill the process using the PID `sudo kill -9 process_id` or `sudo kill -9 process_id_1 process_id_2 process_id_3` or to kill all processes of a program `sudo kill -9 pidof_program_name`
+  
