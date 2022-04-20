@@ -111,7 +111,30 @@ Bridging development and operations, cross-functional teams to collaborate and r
   - `config.vm.network "private_network", ip: "192.168.10.100"`
 
 ### Bash script - set of commands/instructions from the user to OS
-- Create a .sh called provision.sh
-- Update - upgrade - install nginx - start nginx - enable nginx
+- Create a .sh called provision.sh `touch provision.sh`
+  - `nano provision.sh`
+    - fill in file like so:
+      - `#!/bin/bash`
+      - `sudo apt-get update -y`
+      - `sudo apt-get upgrade -y`
+      - `sudo apt-get install nginx -y`
+      - `sudo systemctl start nginx`
+      - `sudo systemctl enable nginx`
+- in Vagrantfile, add these lines:
+  - `Vagrant.configure("2") do |config|`
+    - #create a virtual machine ubuntu
+    - `config.vm.box = "ubuntu/xenial64"`
+    - #create a private network with provided ip address
+    - `config.vm.network "private_network", ip: "192.168.10.100"`
+
+    - `config.trigger.after :up do |trigger|`
+      - `config.vm.provision "shell", path: "provision.sh"`
+    - `end`
+  - `end`
 - Make the file exe - `chmod +x file_name`
-  
+
+- Now if we run `vagrant up --provision` VM will be created and nginx url page will be available
+
+
+![] 
+("vagrant.png")
