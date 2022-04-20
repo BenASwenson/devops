@@ -14,3 +14,46 @@ With these DevOps principles in place, greater efficiency enables a faster time 
 
 ### Benefits of DevOps
 Bridging development and operations, cross-functional teams to collaborate and resolve, elimate blame culture, release software faster
+
+#### DevOps four key Pillars
+- Ease of use
+- Flexibility
+- Robustness
+- Cost 
+
+##### Creating Development Environment
+- install Ruby
+
+- install Vagrant
+    - in Windows be sure to disable Hyper-V in 'Turn Windows Features On and Off'
+    - type 'vagrant' in the terminal, run as administrator, to ensure it's correctly installed
+    - type 'vagrant --version' 
+
+- install Virtual Box
+    - Windows users manually install drivers
+        -In File Explorer, navigate to C:\Program Files\Oracle\VirtualBox\drivers\vboxdrv
+        -Right click on the VBoxDrv.inf Setup Information file and and select Install
+        -When it's finished installing, open up a new terminal window and run sc start vboxdrv
+        -Press the Windows Key and search for Control Panel, go from there to Network and Internet, then Network and Sharing Centre, then Change Adapter Settings.
+        -Right click on VirtualBox Host-Only Network and choose Properties
+        -Click on Install => Service
+        -Under Manufacturer choose Oracle Corporation and under Network Service, choose VirtualBox NDIS6 Bridged Networking driver
+
+- Create file 'Vagrantfile' inside your designated project folder
+    -paste in the following:
+
+    Vagrant.configure("2") do |config|
+
+        config.vm.box = "ubuntu/xenial64"
+    # creating a virtual machine ubuntu 
+
+ 
+
+
+    end
+
+- Test installation
+    - run 'vagrant up' command from where you have vagrant file available
+        - you may see warnings which is normal and you can ignore them for now
+    - run 'vagrant status'
+    - run 'vagrant ssh'
