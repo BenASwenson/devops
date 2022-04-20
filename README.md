@@ -68,3 +68,16 @@ Bridging development and operations, cross-functional teams to collaborate and r
     - run 'vagrant status'
     - run 'vagrant ssh'
     - update Ubuntu, type sudo apt-get update
+
+### Linux - Ubuntu distro
+
+- Any tool we use must have admin access
+- popular vagrant commands:
+  - `vagrant up`
+  - `vagrant destroy`
+  - `vagrant halt`
+  - `vagrant reload`
+- update `sudo apt-get update -y`
+- upgrade `sudo apt-get upgrade -y`
+- Who am I `uname` or `uname -a`
+- Where am I `pwd`
