@@ -104,4 +104,14 @@ Bridging development and operations, cross-functional teams to collaborate and r
 - how to delete a process
   - find the process ID (PID) of the program `pidof program_name`
   - kill the process using the PID `sudo kill -9 process_id` or `sudo kill -9 process_id_1 process_id_2 process_id_3` or to kill all processes of a program `sudo kill -9 pidof_program_name`
+- How to install a product - install webserver called `nginx`
+    - `sudo apt-get install package_name`
+- How to check the `status` - `systemctl status nginx`
+- create private network with provided ip address - in Vagrantfile add:
+  - `config.vm.network "private_network", ip: "192.168.10.100"`
+
+### Bash script - set of commands/instructions from the user to OS
+- Create a .sh called provision.sh
+- Update - upgrade - install nginx - start nginx - enable nginx
+- Make the file exe - `chmod +x file_name`
   
