@@ -135,6 +135,7 @@ Bridging development and operations, cross-functional teams to collaborate and r
 
 - Now if we run `vagrant up --provision` VM will be created and nginx url page will be available
 
+### Diagram of Development Environment Process  
 
 ![] 
 (https://miro.medium.com/max/826/1*wt3QFxkSjSZE5CEblJ3QQQ.png)
