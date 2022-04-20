@@ -26,6 +26,7 @@ Bridging development and operations, cross-functional teams to collaborate and r
     - Iterative approach to design
     - Continuous integration
     - Increased levels of processes automation
+    - seamless communication since it unites what were once two seperate teams
 - Cost 
     - Initial cost but high ROI
     - Less miscommunication between teams allows for faster delivery 
@@ -66,3 +67,4 @@ Bridging development and operations, cross-functional teams to collaborate and r
         - you may see warnings which is normal and you can ignore them for now
     - run 'vagrant status'
     - run 'vagrant ssh'
+    - update Ubuntu, type sudo apt-get update
