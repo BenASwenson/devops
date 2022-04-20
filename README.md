@@ -17,9 +17,19 @@ Bridging development and operations, cross-functional teams to collaborate and r
 
 #### DevOps four key Pillars
 - Ease of use
+    -Automated pipelines
+    -Allows developers to spend more time coding and ensures their work is closer to business intent
 - Flexibility
+    - The ability to adopt to new market requirements
+    - Ability to extend and replace the existing tool sets
 - Robustness
+    - Iterative approach to design
+    - Continuous integration
+    - Increased levels of processes automation
 - Cost 
+    - Initial cost but high ROI
+    - Less miscommunication between teams allows for faster delivery 
+    - More delivered products = more money
 
 ##### Creating Development Environment
 - install Ruby
