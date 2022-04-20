@@ -137,4 +137,4 @@ Bridging development and operations, cross-functional teams to collaborate and r
 
 
 ![] 
-("vagrant.png")
+(https://miro.medium.com/max/826/1*wt3QFxkSjSZE5CEblJ3QQQ.png)
