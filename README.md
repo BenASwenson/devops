@@ -36,11 +36,13 @@ Bridging development and operations, cross-functional teams to collaborate and r
 - install Ruby
 
 - install Vagrant
+    - Vagrant is a tool for building and managing virtual machine environments in a single workflow. With an easy-to-use workflow and focus on automation, Vagrant lowers development environment setup time, increases production parity, and makes the “works on my machine” excuse a relic of the past
     - in Windows be sure to disable Hyper-V in 'Turn Windows Features On and Off'
     - type 'vagrant' in the terminal, run as administrator, to ensure it's correctly installed
     - type 'vagrant --version' 
 
 - install Virtual Box
+    - VirtualBox is a general-purpose full virtualizer for x86 hardware, targeted at server, desktop and embedded use
     - Windows users manually install drivers
         -In File Explorer, navigate to C:\Program Files\Oracle\VirtualBox\drivers\vboxdrv
         -Right click on the VBoxDrv.inf Setup Information file and and select Install
@@ -51,6 +53,7 @@ Bridging development and operations, cross-functional teams to collaborate and r
         -Under Manufacturer choose Oracle Corporation and under Network Service, choose VirtualBox NDIS6 Bridged Networking driver
 
 - Create file 'Vagrantfile' inside your designated project folder
+    - you can also create this file in your terminal inside project folder with command `vagrant init` 
     -paste in the following:
 
     Vagrant.configure("2") do |config|
@@ -73,10 +76,10 @@ Bridging development and operations, cross-functional teams to collaborate and r
 
 - Any tool we use must have admin access
 - popular vagrant commands:
-  - `vagrant up`
-  - `vagrant destroy`
-  - `vagrant halt`
-  - `vagrant reload`
+  - `vagrant up` #This command creates and configures guest machines according to your Vagrantfile
+  - `vagrant destroy` #This command stops the running machine Vagrant is managing and destroys all resources that were created during the machine creation process.
+  - `vagrant halt` #This command shuts down the running machine Vagrant is managing
+  - `vagrant reload` #The equivalent of running a halt followed by an up.
 - update `sudo apt-get update -y`
 - upgrade `sudo apt-get upgrade -y`
 - Who am I `uname` or `uname -a`
@@ -111,31 +114,38 @@ Bridging development and operations, cross-functional teams to collaborate and r
   - `config.vm.network "private_network", ip: "192.168.10.100"`
 
 ### Bash script - set of commands/instructions from the user to OS
+- Provisioning is all tasks related to deployment and configurations of applications making them ready to use.
 - Create a .sh called provision.sh `touch provision.sh`
   - `nano provision.sh`
     - fill in file like so:
-      - `#!/bin/bash`
-      - `sudo apt-get update -y`
-      - `sudo apt-get upgrade -y`
-      - `sudo apt-get install nginx -y`
-      - `sudo systemctl start nginx`
-      - `sudo systemctl enable nginx`
+      - `#!/bin/bash` #the she-bang at the head of the script tells the system this file is a set of commands to be fed to the command interpreter indicated.
+      - `sudo apt-get update -y` #downloads the updates of all packages repositories from all configured files or sources.
+      - `sudo apt-get upgrade -y` #used to install the newest versions of all packages currently installed on the system
+      - `sudo apt-get install nginx -y` #install and configure nginx on Ubuntu
+      - `sudo systemctl start nginx` #start the nginx service on a Linux machine
+      - `sudo systemctl enable nginx` #marks the unit for auto start at boot time
 - in Vagrantfile, add these lines:
   - `Vagrant.configure("2") do |config|`
     - #create a virtual machine ubuntu
     - `config.vm.box = "ubuntu/xenial64"`
     - #create a private network with provided ip address
     - `config.vm.network "private_network", ip: "192.168.10.100"`
-
+    - #Provisioners in Vagrant allow you to automatically install software, alter configurations, and more on the machine as part of the vagrant up process
     - `config.trigger.after :up do |trigger|`
       - `config.vm.provision "shell", path: "provision.sh"`
     - `end`
   - `end`
-- Make the file exe - `chmod +x file_name`
+- Make the file exe - `chmod +x file_name` #executables are used to install or run applications
 
 - Now if we run `vagrant up --provision` VM will be created and nginx url page will be available
 
 ### Diagram of Development Environment Process  
+  
 
 ![] 
 (https://miro.medium.com/max/826/1*wt3QFxkSjSZE5CEblJ3QQQ.png)
+
+- Vagrant spins up a virtual machine for you, configures it and installs software on it. All those actions are described in a single text file, called Vagrantfile, that can be shared among team members allowing everyone to have one and the same setup.
+- an important reason to use Vagrant is to test how your deployment works, i.e. provisioning, locally before pushing those changes to other environments.
+- Other important use cases include the ability to create own development/test environment which is very hard to create on a local machine. 
+
