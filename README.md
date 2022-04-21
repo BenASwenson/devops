@@ -58,8 +58,19 @@ Bridging development and operations, cross-functional teams to collaborate and r
 
     Vagrant.configure("2") do |config|
 
+        # creating a virtual machine ubuntu
         config.vm.box = "ubuntu/xenial64"
-    #creating a virtual machine ubuntu
+
+        # create private network
+        config.vm.network "private_network", ip: "192.168.10.100"
+
+        #synced app folder
+        config.vm.synced_folder ".", "/home/vagrant/app"
+
+        "Provisioning
+        config.trigger.after :up, :provision do |trigger|
+        config.vm.provision "shell", path: "provision.sh"
+      end
  
 
 
@@ -124,20 +135,27 @@ Bridging development and operations, cross-functional teams to collaborate and r
       - `sudo apt-get install nginx -y` #install and configure nginx on Ubuntu
       - `sudo systemctl start nginx` #start the nginx service on a Linux machine
       - `sudo systemctl enable nginx` #marks the unit for auto start at boot time
+      - `sudo apt-get install nodejs -y` #NodeJs
+      - `sudo apt-get install nodejs=** -y` #NodeJs
+      - `sudo apt-get install python-software-properties -y` #NodeJs
+      - `curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -` #NodeJs
+      - `sudo apt-get install nodejs -y` #NodeJs
 - in Vagrantfile, add these lines:
-  - `Vagrant.configure("2") do |config|`
+  - `Vagrant.configure("2") do |config|` #The "2" in the first line above represents the version of the configuration object config that will be used for configuration for that block (the section between the do and the end). 
     - #create a virtual machine ubuntu
     - `config.vm.box = "ubuntu/xenial64"`
     - #create a private network with provided ip address
     - `config.vm.network "private_network", ip: "192.168.10.100"`
+    - #Synced app folder
+    - `config.vm.synced_folder ".", "/home/vagrant/app"`
     - #Provisioners in Vagrant allow you to automatically install software, alter configurations, and more on the machine as part of the vagrant up process
-    - `config.trigger.after :up do |trigger|`
+    - `config.trigger.after :up, :provision do |trigger|`
       - `config.vm.provision "shell", path: "provision.sh"`
     - `end`
   - `end`
 - Make the file exe - `chmod +x file_name` #executables are used to install or run applications
 
-- Now if we run `vagrant up --provision` VM will be created and nginx url page will be available
+- Now if we run `vagrant up --provision` VM will be created and nginx url page will be available or `vagrant up` works
 
 ### Diagram of Development Environment Process  
   
@@ -149,3 +167,50 @@ Bridging development and operations, cross-functional teams to collaborate and r
 - an important reason to use Vagrant is to test how your deployment works, i.e. provisioning, locally before pushing those changes to other environments.
 - Other important use cases include the ability to create own development/test environment which is very hard to create on a local machine. 
 
+
+### Env Variable
+- how to check existing `env`, `Env var`, `printenv`
+  - access HOME variable `printenv HOME`
+- how to print specific env var
+- how to create an env var
+  - the key word `export`
+  - ie `export NAME=Ben` KEY=value
+- how to make an env var persistent on linux ubuntu
+  - open the current user's profile into a text editor
+    - `vi ~/.bash_profile`
+  - add the export command for every environment variable you want to persist
+    - `export JAVA_HOME=/opt/openjdk11`
+  - save your changes
+  - to immediately apply all changes to bash_profile, use the source command
+    - `source ~/.bash_profile`
+
+
+
+### Getting started with deployment / Questions to ask development team
+- What are the dependencies required?
+- How to run the env tests written in Ruby
+- How to transfer/send data from our localhost to our VM
+- run the Ruby tests to ensure the dev env has everything needed to deploy the app
+- Integration testing - yes/no?
+- navigate to spec-tests folder of app and run `gem install bundler` which are required to run Ruby tests
+- next run `bundle` to fetch Ruby dependencies
+- transfer data from localhost to VM in vagrant with `config.vm.synced_folder ".", "/home/vagrant/app"`
+- run tests with `rake spec`
+- Failed tests, so go do something to pass them
+  - For nginx
+    - `vm$ sudo apt-get install nginx -y`
+    - `vm$ sudo apt-get upgrade nginx -y`
+    - `vm$ sudo systemctl start nginx`
+    - `vm$ sudo systemctl enable nginx`
+  - For NodeJs
+    - `$ sudo apt-get install nodejs -y` won't get us the specified version
+      - For specific v6.
+        - `vm$ sudo apt-get install nodejs=** -y`
+        - `vm$ sudo apt-get install python-software-properties -y`
+        - `vm$ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -`  refer to https://github.com/nodesource/distributions/blob/master/README.md
+        - `vm$ sudo apt-get install nodejs -y` | `$ sudo apt-get install -y nodejs` (check)
+  - cd app/app, or wherever the deepest app folder is (for now)
+    - `vm$ npm install`
+    - `vm$ npm start`
+    - get the port num {IP}:{port_num} ie `192.168.10.100:3000`
+- create .gitignore and ignore node_modules or any dependencies not needed to be pushed to github
