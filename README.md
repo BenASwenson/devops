@@ -214,3 +214,12 @@ Bridging development and operations, cross-functional teams to collaborate and r
     - `vm$ npm start`
     - get the port num {IP}:{port_num} ie `192.168.10.100:3000`
 - create .gitignore and ignore node_modules or any dependencies not needed to be pushed to github
+
+### Reverse Proxy
+- Using Nginx as a Reverse Proxy
+- Use nginx to listen on port 3000 send to 80
+- How to configure the reverse proxy using Nginx?
+- cd/etc/nginx/sites-available
+- sudo nano default
+- cd app/app
+- npm start
